@@ -81,8 +81,6 @@ class FlowManager:
                     FlowRepository.store_task_run(run_id, current, "running")
                     success, output = await task_instance.run({"previous_output": prev_output})
                 except Exception as ex:
-                    success = False
-                    output = None
                     FlowRepository.store_task_run(run_id, current, TaskOutcome.FAILURE.value, None, f"exception: {ex}")
                     current = self._evaluate(conditions, current, succeeded=False)
                     continue
@@ -113,6 +111,7 @@ class FlowManager:
         except Exception:
             FlowRepository.update_run_status(run_id, FlowRunStatus.FAILED)
         finally:
+            # Your IDE might warn that "Coroutine 'pop' is not awaited" it can be ignored as pop is synchronous
             self.running_tasks.pop(run_id, None)
             self.cancellation_events.pop(run_id, None)
 

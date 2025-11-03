@@ -12,7 +12,7 @@ class TaskRun(Base):
     status = Column(String(50), nullable=False)
     output = Column(Text, nullable=True)
     error = Column(Text, nullable=True)
-    started_at = Column(DateTime, default=datetime.utcnow)
+    started_at = Column(DateTime, default=datetime.now)
     finished_at = Column(DateTime, nullable=True)
 
 class TaskRegistry(Base):
