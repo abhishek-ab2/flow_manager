@@ -1,10 +1,14 @@
-.PHONY: build up seed shell
-
 build:
 	docker compose build
 
-up:
-	docker compose up --build
+start:
+	docker compose up -d
+
+build-and-start:
+    docker compose up --build -d
+
+purge:
+    docker compose down -v
 
 shell:
 	docker compose run --rm web /bin/sh

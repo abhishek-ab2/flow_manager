@@ -8,33 +8,30 @@ This repository contains the Flow Manager microservice implemented in FastAPI us
 - SQL schema and seed files provided in `sql/` and executed on DB initialization
 - Swagger UI available at `/docs`
 - Docker Compose to bring up MySQL and the app
-- Makefile target for seeding
+- Makefile target for easy initialization
 
 ## Quickstart (Docker Compose)
 
 1. Build and start the services:
 ```bash
-make build
-make up
+make build-and-start
 ```
 
 2. Swagger UI: `http://localhost:8000/docs`
 
-3. Seed (if needed): `make seed` (this runs `python -m app.db_init --seed-only` inside the web container).
-
 ## Local development (no Docker)
 
-1. Ensure you have a MySQL server and create a database named `flowdb` and a user `flowuser` with password `flowpass`, or set `DATABASE_URL` accordingly:
+3. Ensure you have a MySQL server and create a database named `flowdb` and a user `flowuser` with password `flowpass`, or set `DATABASE_URL` accordingly:
 ```bash
 export DATABASE_URL='mysql+pymysql://flowuser:flowpass@localhost:3306/flowdb'
 ```
 
-2. Install dependencies:
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Start server:
+5. Start server:
 ```bash
 uvicorn app.main:app --reload
 ```
